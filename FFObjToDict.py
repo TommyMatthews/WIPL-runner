@@ -1,8 +1,7 @@
 import wiplpy.WResults
 import pickle
 
-
-class FFObjToDictConverter:
+class FFObjToDictConverter():
 
     def __init__(self, ffobject, theta, frequency):
         self.ffobject = ffobject
@@ -10,47 +9,22 @@ class FFObjToDictConverter:
         self.frequency = frequency
 
     def extract_phi_results(self):
-        re_Ephi = self.ffobject.GetYData(
-            "Phi-component",
-            "Re",
-            XaxisLabel="phi",
-            Cuts={"Theta": self.theta, "Frequency": self.frequency, "Excitation": 1},
-        )
-        im_Ephi = self.ffobject.GetYData(
-            "Phi-component",
-            "Im",
-            XaxisLabel="phi",
-            Cuts={"Theta": self.theta, "Frequency": self.frequency, "Excitation": 1},
-        )
-
+        re_Ephi = self.ffobject.GetYData('Phi-component',"Re", XaxisLabel='phi',Cuts ={"Theta" : self.theta, "Frequency" : self.frequency,"Excitation" : 1})
+        im_Ephi = self.ffobject.GetYData('Phi-component',"Im", XaxisLabel='phi',Cuts ={"Theta" : self.theta, "Frequency" : self.frequency,"Excitation" : 1})
+        
         return re_Ephi, im_Ephi
-
+    
     def extract_theta_results(self):
-        re_Etheta = self.ffobject.GetYData(
-            "Theta-component",
-            "Re",
-            XaxisLabel="phi",
-            Cuts={"Theta": self.theta, "Frequency": self.frequency, "Excitation": 1},
-        )
-        im_Etheta = self.ffobject.GetYData(
-            "Theta-component",
-            "Im",
-            XaxisLabel="phi",
-            Cuts={"Theta": self.theta, "Frequency": self.frequency, "Excitation": 1},
-        )
-
+        re_Etheta = self.ffobject.GetYData('Theta-component',"Re", XaxisLabel='phi',Cuts ={"Theta" : self.theta, "Frequency" : self.frequency,"Excitation" : 1})
+        im_Etheta = self.ffobject.GetYData('Theta-component',"Im", XaxisLabel='phi',Cuts ={"Theta" : self.theta, "Frequency" : self.frequency,"Excitation" : 1})
+        
         return re_Etheta, im_Etheta
 
     def extract_total_rcs(self):
-        total_rcs = self.ffobject.GetYData(
-            "Total",
-            "RCS",
-            XaxisLabel="phi",
-            Cuts={"Theta": self.theta, "Frequency": self.frequency, "Excitation": 1},
-        )
+        total_rcs = self.ffobject.GetYData('Total',"RCS", XaxisLabel='phi',Cuts ={"Theta" : self.theta, "Frequency" : self.frequency,"Excitation" : 1})
 
         return total_rcs
-
+    
     def generate_output_dict(self):
 
         re_Ephi, im_Ephi = self.extract_phi_results()
@@ -59,22 +33,29 @@ class FFObjToDictConverter:
         total_rcs = self.extract_total_rcs()
 
         self.output_dict = {
-            "phi": self.ffobject.GetPhiPoints(),
-            "Re_Ephi": re_Ephi,
-            "Im_Ephi": im_Ephi,
-            "Re_Etheta": re_Etheta,
-            "Im_Etheta": im_Etheta,
-            "Total_RCS": total_rcs,
+            'phi': self.ffobject.GetPhiPoints(),
+            'Re_Ephi': re_Ephi,
+            'Im_Ephi': im_Ephi,
+            'Re_Etheta': re_Etheta,
+            'Im_Etheta': im_Etheta,
+            'Total_RCS': total_rcs,
         }
 
-        self.output_dict["theta"] = self.theta
-        self.output_dict["frequency"] = self.frequency
+        self.output_dict['theta'] = self.theta
+        self.output_dict['frequency'] = self.frequency
 
         return self.output_dict
-
+    
+    def get_output_dict(self):
+        return self.output_dict
+    
+    def save_output_dict(self, file_path):
+        with open(file_path, 'wb') as f:
+            pickle.dump(self.output_dict, f)
+    
 
 if __name__ == "__main__":
-    with open("X_V_alternate_run_results.pkl", "rb") as file:
+    with open('X_V_alternate_run_results.pkl', 'rb') as file:
         ffobject = pickle.load(file)
 
     theta = ffobject.GetThetaPoints()[0]
@@ -84,5 +65,5 @@ if __name__ == "__main__":
 
     output_dict = results_extractor.generate_output_df()
 
-with open("X_V_alternate_run_dict.pkl", "wb") as f:
+with open('X_V_alternate_run_dict.pkl', 'wb') as f:
     pickle.dump(output_dict, f)
