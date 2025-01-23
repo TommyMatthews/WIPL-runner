@@ -8,6 +8,8 @@ class FFObjToDictConverter():
         self.theta = theta
         self.frequency = frequency
 
+        self.OUTPUT_GENERATED = False
+
     def extract_phi_results(self):
         re_Ephi = self.ffobject.GetYData('Phi-component',"Re", XaxisLabel='phi',Cuts ={"Theta" : self.theta, "Frequency" : self.frequency,"Excitation" : 1})
         im_Ephi = self.ffobject.GetYData('Phi-component',"Im", XaxisLabel='phi',Cuts ={"Theta" : self.theta, "Frequency" : self.frequency,"Excitation" : 1})
@@ -44,12 +46,20 @@ class FFObjToDictConverter():
         self.output_dict['theta'] = self.theta
         self.output_dict['frequency'] = self.frequency
 
-        return self.output_dict
+        self.OUTPUT_GENERATED = True
     
     def get_output_dict(self):
+
+        if not self.OUTPUT_GENERATED:
+            self.generate_output_dict()
+
         return self.output_dict
     
     def save_output_dict(self, file_path):
+
+        if not self.OUTPUT_GENERATED:
+            self.generate_output_dict()
+
         with open(file_path, 'wb') as f:
             pickle.dump(self.output_dict, f)
     
@@ -63,7 +73,4 @@ if __name__ == "__main__":
 
     results_extractor = FFObjToDictConverter(ffobject, theta, frequency)
 
-    output_dict = results_extractor.generate_output_df()
-
-with open('X_V_alternate_run_dict.pkl', 'wb') as f:
-    pickle.dump(output_dict, f)
+    results_extractor.save_output_dict('X_V_alternate_run_results.pkl')

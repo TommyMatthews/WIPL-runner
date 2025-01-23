@@ -1,0 +1,35 @@
+import wiplpy.WiplInterface
+import wiplpy.WResults
+from FFObjToDict import FFObjToDictConverter
+
+PROJECT_PATH = r"C:\Users\NCAS\Documents\Tommy\purple_martin_work\P_Martin2\X_band\horizontal_alternate_run\M_Wing_1_100_H_X"
+
+WIPLDInstallDirectory = r"C:\WIPL-D Pro CAD 2024"
+
+BASE_FILE_NAME = "X_H_alternate_run"
+
+pro= wiplpy.WiplInterface.InitializeWIPLDSuite(WIPLDInstallDirectory, "wipldpro")
+
+pro.Run(PROJECT_PATH)
+
+far_field = wiplpy.WResults.InitializeFFResults(PROJECT_PATH)
+
+theta = far_field.GetThetaPoints()[0]
+frequencies = far_field.GetFrequencies()
+
+if len(frequencies) > 1:
+    print("Multiple frequencies present")
+    for counter, frequency in enumerate(far_field.GetFrequencies()):
+        print(f'Saving frequency number {counter}, value {frequency} GHz' )
+        results_extractor = FFObjToDictConverter(far_field, theta, frequency)
+        results_extractor.save_output_dict(f"{BASE_FILE_NAME}_f{counter}_dict.pkl")
+
+else:
+    print("Only one frequency present")
+    frequency = frequencies[0]
+    results_extractor = FFObjToDictConverter(far_field, theta, frequency)
+    results_extractor.save_output_dict(f"{BASE_FILE_NAME}_dict.pkl")
+
+
+
+    
