@@ -4,12 +4,12 @@ from FFObjToDict import FFObjToDictConverter
 
 PROJECT_PATH = r"E:\Working_Copy\Bernard_Ellipsoid_Comparison\Bernard\LepidopteraNoctuidaeMoth_12_Full_M_0250_0375_94_MirkLBG_ChenMeanandLegs"
 #PROJECT_PATH = r"C:\Users\NCAS\Documents\Tommy\purple_martin_work\P_Martin2\X_band\horizontal_alternate_run\M_Wing_1_100_H_X"
-
+#PROJECT_PATH = r"C:\Users\NCAS\Documents\Tommy\purple_martin_work\P_Martin2\S_band\horizontal_alternate_run\M_Wing_1_100_H_alternate_run"
 
 WIPLDInstallDirectory = r"C:\WIPL-D Pro CAD 2024"
 
-#BASE_FILE_NAME = "X_H_alternate_run"
-BASE_FILE_NAME = "FullSize_B_freq_sweep"
+BASE_FILE_NAME = "S_H_alternate_run"
+#BASE_FILE_NAME = "FullSize_B_freq_sweep"
 SAVE_PATH = r"C:\Users\NCAS\Documents\Tommy\Bernard_run_outputs\\"
 
 pro= wiplpy.WiplInterface.InitializeWIPLDSuite(WIPLDInstallDirectory, "wipldpro")
