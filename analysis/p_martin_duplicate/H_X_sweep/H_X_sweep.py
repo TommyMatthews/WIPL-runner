@@ -3,9 +3,9 @@ import wiplpy.WResults
 
 PROJECT_PATH = r"C:\Users\NCAS\Documents\Tommy\analysis_code\WIPL-python-analysis\results_files\p_martin_duplicate\H_X_sweep\M_Wing_1_100_H_X_sweep"
 
-#WIPLDInstallDirectory = r"C:\Program Files\WIPL-D\WIPL-D Pro 13.02.00"
+# WIPLDInstallDirectory = r"C:\Program Files\WIPL-D\WIPL-D Pro 13.02.00"
 
-#WIPLD = wiplpy.WiplInterface(WIPLDInstallDirectory, "wipldpro")
+# WIPLD = wiplpy.WiplInterface(WIPLDInstallDirectory, "wipldpro")
 
 far_field = wiplpy.WResults.InitializeFFResults(PROJECT_PATH)
 
@@ -17,9 +17,14 @@ frequency = far_field.GetFrequencies()[0]
 print(theta, frequency)
 phi_results = far_field.GetPhiPoints()
 
-#print(phi_results)
+# print(phi_results)
 
-results_by_phi =  far_field.GetYData('Phi-component',"Re", XaxisLabel='phi',Cuts ={"Theta" : theta, "Frequency" : frequency,"Excitation" : 2})
+results_by_phi = far_field.GetYData(
+    "Phi-component",
+    "Re",
+    XaxisLabel="phi",
+    Cuts={"Theta": theta, "Frequency": frequency, "Excitation": 2},
+)
 
 print(results_by_phi)
-#think I need to try this on a run that has been run using a built in set of excitations rather than a sweep.
+# think I need to try this on a run that has been run using a built in set of excitations rather than a sweep.
