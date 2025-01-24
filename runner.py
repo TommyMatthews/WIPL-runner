@@ -8,8 +8,8 @@ PROJECT_PATH = r"E:\Working_Copy\Bernard_Ellipsoid_Comparison\Bernard\Lepidopter
 
 WIPLDInstallDirectory = r"C:\WIPL-D Pro CAD 2024"
 
-BASE_FILE_NAME = "S_H_alternate_run"
-#BASE_FILE_NAME = "FullSize_B_freq_sweep"
+#BASE_FILE_NAME = "S_H_alternate_run"
+BASE_FILE_NAME = "FullSize_B_freq_sweep"
 SAVE_PATH = r"C:\Users\NCAS\Documents\Tommy\Bernard_run_outputs\\"
 
 pro= wiplpy.WiplInterface.InitializeWIPLDSuite(WIPLDInstallDirectory, "wipldpro")
