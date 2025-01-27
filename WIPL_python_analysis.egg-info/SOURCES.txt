@@ -1,6 +1,0 @@
-README.md
-setup.py
-WIPL_python_analysis.egg-info/PKG-INFO
-WIPL_python_analysis.egg-info/SOURCES.txt
-WIPL_python_analysis.egg-info/dependency_links.txt
-WIPL_python_analysis.egg-info/top_level.txt

@@ -1,12 +1,13 @@
-import joblib
 import pandas as pd
-
+import WIPL_python_analysis
+import pickle
 
 class OutputDictToSinglePolResultsConverter:
 
     @classmethod
     def from_pickle(cls, file_path):
-        dict_results = joblib.load(file_path)
+        with open(file_path, 'rb') as file:
+            dict_results = pickle.load(file)
         return cls(dict_results)
 
     def __init__(self, dict_results):
@@ -32,7 +33,7 @@ class OutputDictToSinglePolResultsConverter:
 
 if __name__ == "__main__":
     results = OutputDictToSinglePolResultsConverter.from_pickle(
-        "X_V_alternate_run_dict.pkl"
+        "X_H_alternate_run_dict.pkl"
     )
     df = results.generate_output_df()
-    df.to_csv("X_V_alternate_run_df.csv")
+    df.to_csv("X_H_alternate_run_df.csv")
