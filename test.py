@@ -4,7 +4,7 @@ import pickle
 
 PROJECT_PATH = r"C:\Users\NCAS\Documents\Tommy\purple_martin_work\P_Martin2\X_band\vertical_alternate_run_test_dummy\M_Wing_1_100_V_X_alternate_run"
 
-# WIPLDInstallDirectory = r"C:\Program Files\WIPL-D\WIPL-D Pro 13.02.00"
+# WIPLDInstallDirectory = r""C:\WIPL-D Pro CAD 2024""
 
 # WIPLD = wiplpy.WiplInterface(WIPLDInstallDirectory, "wipldpro")
 
