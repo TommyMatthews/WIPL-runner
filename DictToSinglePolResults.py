@@ -1,5 +1,5 @@
 import pandas as pd
-import WIPL_python_analysis
+#import WIPL_python_analysis
 import pickle
 
 class OutputDictToSinglePolResultsConverter:
