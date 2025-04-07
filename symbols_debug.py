@@ -12,12 +12,12 @@ WIPLDInstallDirectory = r"C:\WIPL-D Pro CAD 2024"
 
 
 pol_run_list = {
-    "H" : [1,0],
+    # "H" : [1,0],
     "V" : [0,1]
 }
 
 scale_run_list = {
-    "0375" : [0.375],
+    # "0375" : [0.375],
     "1000" : [1.00],
 }
 
