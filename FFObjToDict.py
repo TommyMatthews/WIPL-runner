@@ -43,7 +43,7 @@ class FFObjToDictConverter:
 
         return re_Etheta, im_Etheta
 
-    def extract_total_rcs(self):
+    def extract_rcs(self):
         total_rcs = self.ffobject.GetYData(
             "Total",
             "RCS",
@@ -51,14 +51,44 @@ class FFObjToDictConverter:
             Cuts={"Theta": self.theta, "Frequency": self.frequency, "Excitation": 1},
         )
 
-        return total_rcs
+        phi_rcs = self.ffobject.GetYData(
+            "Phi-component",
+            "RCS",
+            XaxisLabel="phi",
+            Cuts={"Theta": self.theta, "Frequency": self.frequency, "Excitation": 1},
+        )
+
+        theta_rcs = self.ffobject.GetYData(
+            "Theta-component",
+            "RCS",
+            XaxisLabel="phi",
+            Cuts={"Theta": self.theta, "Frequency": self.frequency, "Excitation": 1},
+        )
+
+        return total_rcs, phi_rcs, theta_rcs
+    
+    def extract_phases(self):
+        phi_phase = self.ffobject.GetYData(
+            "Phi-component",
+            "Phase",
+            XaxisLabel="phi",
+            Cuts={"Theta": self.theta, "Frequency": self.frequency, "Excitation": 1},
+        )   
+        theta_phase = self.ffobject.GetYData(
+            "Theta-component",
+            "Phase",
+            XaxisLabel="phi",
+            Cuts={"Theta": self.theta, "Frequency": self.frequency, "Excitation": 1},
+        )     
+
+        return phi_phase, theta_phase
 
     def generate_output_dict(self):
 
         re_Ephi, im_Ephi = self.extract_phi_results()
         re_Etheta, im_Etheta = self.extract_theta_results()
-
-        total_rcs = self.extract_total_rcs()
+        phi_phase, theta_phase = self.extract_phases()
+        total_rcs, phi_rcs, theta_rcs = self.extract_rcs()
 
         self.output_dict = {
             "phi": self.ffobject.GetPhiPoints(),
@@ -66,7 +96,11 @@ class FFObjToDictConverter:
             "Im_Ephi": im_Ephi,
             "Re_Etheta": re_Etheta,
             "Im_Etheta": im_Etheta,
+            "phi_phase": phi_phase,
+            "theta_phase": theta_phase,
             "Total_RCS": total_rcs,
+            "phi_rcs": phi_rcs,
+            "theta_rcs": theta_rcs,
         }
 
         self.output_dict["theta"] = self.theta

@@ -7,25 +7,27 @@ import io
 import os
 import sys
 
-
+# SET UP FOR PITCH AND SLANT ANALYSIS IN BOTH POLARISATIONS C-BAND
 
 WIPLDInstallDirectory = r"C:\WIPL-D Pro CAD 2024"
 
-morpho_list = ['body'] #['body_wing', 'body_leg', 'body']
+# morpho_list = ['body_wing'] #['body_wing', 'body_leg', 'body']
 # morpho_list = ['body_wing_leg']
-wing_pos_list = ['M'] # left out 'M' as already run
+wing_pos_list = ['mid', 'up', 'down'] # left out 'M' as already run
 
+# frequency_name = '560'
+# f = 5.6
+# ReBody = 43
+# ImBody = 19
+# ReChitin = 5.1
+# ImChitin = 0.12
 
-wing_pos = 'M'
-morpho = 'body'
-
-frequency_name_list = ['020', '027', '037', '049', '067', '090', '120', '160', '220', '300']
-f_list = [2, 2.7, 3.7, 4.9, 6.7, 9.0, 12, 16, 22, 30]
-ReBody_list = [47, 46, 44, 41, 40, 35, 30, 25, 20, 15]
-ImBody_list = [20, 19, 19, 19, 19, 19, 19, 19, 19, 19]
-ReChitin_list = [5.3, 5.2, 5.2, 5.1, 5.1, 5.0, 5.0, 4.9, 4.9, 4.8]
-ImChitin_list = [0.11, 0.12, 0.12, 0.12, 0.12, 0.12, 0.13, 0.13, 0.13, 0.13]
-f_info_list = list(zip(frequency_name_list, f_list, ReBody_list, ImBody_list, ReChitin_list, ImChitin_list))
+frequency_name = '027'
+f = 2.7
+ReBody = 46
+ImBody = 19
+ReChitin = 5.3
+ImChitin = 0.12
 
 
 pol_run_dict = {
@@ -34,30 +36,25 @@ pol_run_dict = {
 }
 
 # pitch_list = list(range(0,11))
-slant_list = [0,0.5,1,2,3,4,6,9]
+# slant_list = [0,0.5,1,2,3,4,6,9]
 # pitch_slant_combos = list(zip(pitch_list + [0]*len(slant_list),[0]*len(pitch_list) + slant_list))
-slant_name_list = ['0','05','1','2','3','4','6','9']
-slant_name_dict = {x : y for x, y in zip(slant_list, slant_name_list)}
-
-slant=0
-pitch=0
+# slant_name_list = ['0','05','1','2','3','4','6','9']
+# slant_name_dict = {x : y for x, y in zip(slant_list, slant_name_list)}
 
 scale_run_list = {
-    "0206" : 0.466,
-    "0553" : 1.25,
+    # "0206" : 0.466,
+    # "0553" : 1.25,
     "1000" : 2.26365,
-    "1588" : 3.6,
+    # "1588" : 3.6,
 }
 
-counter = 0
 
-for scale, scale_factor in scale_run_list.items():
-    for pol in pol_run_dict.keys():
-        for frequency_name, f, ReBody, ImBody, ReChitin, ImChitin in f_info_list:
-            
-                counter += 1
+for wing_pos in wing_pos_list:
+    for scale, scale_factor in scale_run_list.items():
+        for pol in pol_run_dict.keys():
 
-                PROJECT_PATH = r'E:\Working_Copy\Bernard_Ellipsoid_Comparison\Bernard_top\parameterised\\' + f"Bernard_0250_param_{wing_pos}_{morpho}"
+                
+                PROJECT_PATH = r'E:\Working_Copy\Bernard_Ellipsoid_Comparison\Bernard_top\parameterised\replace_wing\parameterised\\' + f"Bernard_rw_{wing_pos}_thicker_rotated_0250"
                 SYMB_PATH = PROJECT_PATH + '.SMB'
 
                 SymbolsList = wiplpy.WSymbols.GetSymbols(SYMB_PATH)
@@ -69,18 +66,18 @@ for scale, scale_factor in scale_run_list.items():
                 SymbolsList.SetSymbolByName("ImBody", ImBody)
                 SymbolsList.SetSymbolByName("ReChitin", ReChitin)
                 SymbolsList.SetSymbolByName("ImChitin", ImChitin)
-                SymbolsList.SetSymbolByName("pitch", pitch)
-                SymbolsList.SetSymbolByName("slant", slant)
+                SymbolsList.SetSymbolByName("pitch", 0)
+                SymbolsList.SetSymbolByName("slant", 0)
 
 
                 pro = wiplpy.WiplInterface.InitializeWIPLDSuite(WIPLDInstallDirectory, "wipldpro")
 
-                print(f"Running run number {counter}")
-                print(f"Running {wing_pos} {scale} {morpho} {pol} {pitch} {slant}run")
+                
+                print(f"Running {wing_pos} {scale} {pol} {0} {0}run")
                 SymbolsList.PrintSymbols()
 
-                BASE_FILE_NAME = f"Bernard_parameterised_{frequency_name}_{pol}_{wing_pos}_{scale}_{morpho}_p{pitch}_s{slant_name_dict[slant]}"
-                SAVE_PATH = r"C:\Users\NCAS\Documents\Tommy\Bernard_run_outputs\parameterised\\size_frequency_analysis\\"
+                BASE_FILE_NAME = f"Bernard_dummy_wing_parameterised_{frequency_name}_{pol}_{wing_pos}_{scale}_p{0}_s{0})"
+                SAVE_PATH = r"C:\Users\NCAS\Documents\Tommy\Bernard_run_outputs\parameterised\replace_wing\low_frequency\\"
 
 
                 # Capture the output of PrintSymbols

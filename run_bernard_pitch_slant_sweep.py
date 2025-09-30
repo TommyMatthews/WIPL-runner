@@ -11,7 +11,7 @@ import sys
 
 WIPLDInstallDirectory = r"C:\WIPL-D Pro CAD 2024"
 
-morpho_list = ['body_wing'] #['body_wing', 'body_leg', 'body']
+morpho_list = ['body'] #['body_wing', 'body_leg', 'body']
 # morpho_list = ['body_wing_leg']
 wing_pos_list = ['M'] # left out 'M' as already run
 
@@ -71,7 +71,7 @@ for wing_pos in wing_pos_list:
                     SymbolsList.PrintSymbols()
 
                     BASE_FILE_NAME = f"Bernard_parameterised_{frequency_name}_{pol}_{wing_pos}_{scale}_{morpho}_p{pitch}_s{slant_name_dict[slant]}"
-                    SAVE_PATH = r"C:\Users\NCAS\Documents\Tommy\Bernard_run_outputs\parameterised\\pitch_slant_analysis\\"
+                    SAVE_PATH = r"C:\Users\NCAS\Documents\Tommy\Bernard_run_outputs\parameterised\\pitch_slant_analysis_body\\"
 
 
                     # Capture the output of PrintSymbols

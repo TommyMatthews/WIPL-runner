@@ -11,7 +11,7 @@ import sys
 
 WIPLDInstallDirectory = r"C:\WIPL-D Pro CAD 2024"
 
-morpho_list = ['body_wing'] # leaving out 'body_wing' as already run
+morpho_list = ['body'] # leaving out 'body_wing' as already run
 # morpho_list = ['body_wing_leg']
 wing_pos_list = ['M'] # left out 'M' as already run
 

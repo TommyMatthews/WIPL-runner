@@ -2,6 +2,7 @@ import wiplpy.WiplInterface
 import wiplpy.WResults
 import wiplpy.WSymbols as symb
 from FFObjToDict import FFObjToDictConverter
+import numpy as np  
 
 PATH_LIST = [
     # r"E:\Working_Copy\Bernard_Ellipsoid_Comparison\Bernard_top\1000\H\C_band\Bernard_12_Full_M_0250_1000_H_056",
@@ -26,7 +27,26 @@ PATH_LIST = [
     # r"E:\Working_Copy\Bernard_Ellipsoid_Comparison\Bernard_top\1000\H_low_res_no_leg\049\Bernard_H_0063_1000_049_no_leg",
     # r"E:\Working_Copy\Bernard_Ellipsoid_Comparison\Bernard_top\1000\H_low_res_no_leg_wing\049\Bernard_H_0063_1000_049_no_leg_wing",
     # r"E:\Working_Copy\Bernard_Ellipsoid_Comparison\Bernard_top\1000\H_low_res_no_wing\049\Bernard_H_0063_1000_049_no_wing",
-    r"E:\Working_Copy\Bernard_Ellipsoid_Comparison\Bernard_top\1000\H\049\Bernard_12_Full_M_0250_1000_H_049"
+    # r"E:\Working_Copy\Bernard_Ellipsoid_Comparison\Multi_shape_body\Iteration_2\two_sphere_bernard_15_2_H",
+    # r"E:\Working_Copy\Bernard_Ellipsoid_Comparison\Multi_shape_body\Iteration_2\two_sphere_bernard_15_2_V",
+    # r"E:\Working_Copy\Bernard_Ellipsoid_Comparison\Multi_shape_body\Iteration_1\three_sphere_bernard_10_5_2_H",
+    # r"E:\Working_Copy\Bernard_Ellipsoid_Comparison\Multi_shape_body\Iteration_1\three_sphere_bernard_10_5_2_V",
+    # r"E:\Working_Copy\Bernard_Ellipsoid_Comparison\Bernard_top\parameterised\replace_wing\Bernard_rw_down_thicker_rotated_0250_param_M_body_wing_H",
+    # r"E:\Working_Copy\Bernard_Ellipsoid_Comparison\Bernard_top\parameterised\replace_wing\Bernard_rw_down_thicker_rotated_0250_param_M_body_wing_V",
+    # r"E:\Working_Copy\Bernard_Ellipsoid_Comparison\Bernard_top\parameterised\replace_wing\Bernard_rw_up_thicker_rotated_0250_param_M_body_wing_H",
+    # r"E:\Working_Copy\Bernard_Ellipsoid_Comparison\Bernard_top\parameterised\replace_wing\Bernard_rw_up_thicker_rotated_0250_param_M_body_wing_V",
+    # r"E:\Working_Copy\Bernard_Ellipsoid_Comparison\Bernard_top\parameterised\replace_wing\Bernard_rw_thicker_rotated_0250_param_M_body_wing_H",
+    # r"E:\Working_Copy\Bernard_Ellipsoid_Comparison\Bernard_top\parameterised\replace_wing\Bernard_rw_thicker_rotated_0250_param_M_body_wing_V",
+    # r"E:\Working_Copy\Bernard_Ellipsoid_Comparison\Bernard_top\parameterised\replace_wing\Bernard_rw_0250_param_M_body_wing",
+    # r"E:\Working_Copy\Bernard_Ellipsoid_Comparison\Bernard_top\parameterised\replace_wing\Bernard_rw_0250_param_M_body_wing_H",
+    # r"E:\Working_Copy\Bernard_Ellipsoid_Comparison\Bernard_top\parameterised\replace_wing\Bernard_rw_thicker_0250_param_M_body_wing_H",
+    # r"E:\Working_Copy\Bernard_Ellipsoid_Comparison\Bernard_top\parameterised\replace_wing\Bernard_rw_thicker_0250_param_M_body_wing_V",
+    # r"E:\Working_Copy\Bernard_Ellipsoid_Comparison\Ellipsoid_top\ellipsoid_with_wings\Ellipsoid_wings_D_H",
+    # r"E:\Working_Copy\Bernard_Ellipsoid_Comparison\Ellipsoid_top\ellipsoid_with_wings\Ellipsoid_wings_M_H",
+    # r"E:\Working_Copy\Bernard_Ellipsoid_Comparison\Ellipsoid_top\ellipsoid_with_wings\Ellipsoid_wings_U_H",
+    # r"E:\Working_Copy\Bernard_Ellipsoid_Comparison\Ellipsoid_top\ellipsoid_with_wings\Ellipsoid_wings_D_V",
+    # r"E:\Working_Copy\Bernard_Ellipsoid_Comparison\Ellipsoid_top\ellipsoid_with_wings\Ellipsoid_wings_M_V",
+    # r"E:\Working_Copy\Bernard_Ellipsoid_Comparison\Ellipsoid_top\ellipsoid_with_wings\Ellipsoid_wings_U_V",
 ]
 
 SAVE_PATH_LIST = [
@@ -52,7 +72,26 @@ SAVE_PATH_LIST = [
     # r"C:\Users\NCAS\Documents\Tommy\Bernard_run_outputs\1000\H_DICT_PKL_low_res\Bernard_0063_1000_V_049_no_leg.pkl",
     # r"C:\Users\NCAS\Documents\Tommy\Bernard_run_outputs\1000\H_DICT_PKL_low_res\Bernard_0063_1000_V_049_no_leg_wing.pkl",
     # r"C:\Users\NCAS\Documents\Tommy\Bernard_run_outputs\1000\H_DICT_PKL_low_res\Bernard_0063_1000_V_049_no_wing.pkl",
-    r"C:\Users\NCAS\Documents\Tommy\Bernard_run_outputs\1000\H_DICT_PKL\Bernard_0250_1000_H_049.pkl"
+    # r"C:\Users\NCAS\Documents\Tommy\Multi_shape_body\Iteration_2\two_sphere_bernard_15_2_H.pkl",
+    # r"C:\Users\NCAS\Documents\Tommy\Multi_shape_body\Iteration_2\two_sphere_bernard_15_2_V.pkl",
+    # r"C:\Users\NCAS\Documents\Tommy\Multi_shape_body\Iteration_1\three_sphere_bernard_10_5_2_H.pkl",
+    # r"C:\Users\NCAS\Documents\Tommy\Multi_shape_body\Iteration_1\three_sphere_bernard_10_5_2_V.pkl",
+    # r"C:\Users\NCAS\Documents\Tommy\Bernard_run_outputs\parameterised\replace_wing\Bernard_rw_down_thicker_rotated_H.pkl",
+    # r"C:\Users\NCAS\Documents\Tommy\Bernard_run_outputs\parameterised\replace_wing\Bernard_rw_down_thicker_rotated_V.pkl",
+    # r"C:\Users\NCAS\Documents\Tommy\Bernard_run_outputs\parameterised\replace_wing\Bernard_rw_up_thicker_rotated_H.pkl",
+    # r"C:\Users\NCAS\Documents\Tommy\Bernard_run_outputs\parameterised\replace_wing\Bernard_rw_up_thicker_rotated_V.pkl",
+    # r"C:\Users\NCAS\Documents\Tommy\Bernard_run_outputs\parameterised\replace_wing\Bernard_rw_thicker_rotated_H.pkl",
+    # r"C:\Users\NCAS\Documents\Tommy\Bernard_run_outputs\parameterised\replace_wing\Bernard_rw_thicker_rotated_V.pkl",
+    # r"C:\Users\NCAS\Documents\Tommy\Bernard_run_outputs\parameterised\replace_wing\Bernard_rw_V.pkl",
+    # r"C:\Users\NCAS\Documents\Tommy\Bernard_run_outputs\parameterised\replace_wing\Bernard_rw_H.pkl",
+    # r"C:\Users\NCAS\Documents\Tommy\Bernard_run_outputs\parameterised\replace_wing\Bernard_rw_thicker_H.pkl",
+    # r"C:\Users\NCAS\Documents\Tommy\Bernard_run_outputs\parameterised\replace_wing\Bernard_rw_thicker_V.pkl",
+    # r"C:\Users\NCAS\Documents\Tommy\Ellipsoid_run_outputs\Ellipsoid_wings\Ellipsoid_wings_D_H.pkl",
+    # r"C:\Users\NCAS\Documents\Tommy\Ellipsoid_run_outputs\Ellipsoid_wings\Ellipsoid_wings_M_H.pkl",
+    # r"C:\Users\NCAS\Documents\Tommy\Ellipsoid_run_outputs\Ellipsoid_wings\Ellipsoid_wings_U_H.pkl",
+    # r"C:\Users\NCAS\Documents\Tommy\Ellipsoid_run_outputs\Ellipsoid_wings\Ellipsoid_wings_D_V.pkl",
+    # r"C:\Users\NCAS\Documents\Tommy\Ellipsoid_run_outputs\Ellipsoid_wings\Ellipsoid_wings_M_V.pkl",
+    # r"C:\Users\NCAS\Documents\Tommy\Ellipsoid_run_outputs\Ellipsoid_wings\Ellipsoid_wings_U_V.pkl",
 
 ]
 

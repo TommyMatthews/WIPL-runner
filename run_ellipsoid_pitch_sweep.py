@@ -24,7 +24,6 @@ pol_run_dict = {
     "V" : [0,1]
 }
 
-PITCH = 10
 
 pitch_list = list(range(0,9))
 slant_list = [0,0.5,1,2,3,4,6,9]
@@ -39,8 +38,11 @@ scale_run_list = { # moth length in mm
     # "1588" : 27,
 }
 
+scale_factor = 17
+scale = 1000
 
-for scale, scale_factor in scale_run_list.items():
+
+for PITCH in range(0,10): #10 degrees was already run
     for pol in pol_run_dict.keys():
         PROJECT_PATH = r'E:\Working_Copy\Bernard_Ellipsoid_Comparison\Ellipsoid_top\parameterised\\' + f"Ellipsoid_parameterised"
         SYMB_PATH = PROJECT_PATH + '.SMB'
