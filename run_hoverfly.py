@@ -24,12 +24,13 @@ pol_run_dict = {
 # pitch_list = [-25,-20,-15,-10,-5,0,5,10,15,20,25]
 # aspect_ratio_list = [1.6,1.8,2.0,2.2,2.4]
 FREQUENCY = 5.6
-length_mm = [2,8,10,12,14,16,30]
+length_mm = [12] #set up for testing
 # BODY_RE = 56
 # BODY_IM = 15
 
 
-PROJECT_PATH = r"C:\Users\NCAS\Documents\Tommy\Sketchfab_hoverfly\exports\Syrphus_ribesii_body_only0400"
+#PROJECT_PATH = r"C:\Users\NCAS\Documents\Tommy\Sketchfab_hoverfly\exports\Syrphus_ribesii_body_only0400"
+PROJECT_PATH = r"G:\Shared drives\Biodar_Comp_Files\Biodar_PC_migration\C\Users\NCAS\Documents\Tommy\Sketchfab_hoverfly\exports\Syrphus_ribesii_body_only0400"
 SYMB_PATH = PROJECT_PATH + '.SMB'
 
 SymbolsList = wiplpy.WSymbols.GetSymbols(SYMB_PATH)
@@ -60,7 +61,7 @@ for size in length_mm:
         SymbolsList.PrintSymbols()
 
         BASE_FILE_NAME = f"hoverfly_0400_p0_s0_{pol}_L{size}"
-        SAVE_PATH = r"C:\Users\NCAS\Documents\Tommy\Sketchfab_hoverfly\results\\"
+        SAVE_PATH = r"C:\\Users\\Tommy\Desktop\\" #WRONG FOR NEW LAPTOP TESTING
 
 
         # Capture the output of PrintSymbols
@@ -69,7 +70,7 @@ for size in length_mm:
         SymbolsList.PrintSymbols()
         sys.stdout = sys.__stdout__
 
-        with open(SAVE_PATH + r'\log_files\\' + f"{BASE_FILE_NAME}_symbol_log.txt", "w") as file:
+        with open(SAVE_PATH  + f"{BASE_FILE_NAME}_symbol_log.txt", "w") as file: #TAKEN OUT: + r'\log_files\\'
             file.write(output.getvalue())
 
         pro.Run(PROJECT_PATH)
