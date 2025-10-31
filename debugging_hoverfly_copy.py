@@ -24,13 +24,13 @@ pol_run_dict = {
 # pitch_list = [-25,-20,-15,-10,-5,0,5,10,15,20,25]
 # aspect_ratio_list = [1.6,1.8,2.0,2.2,2.4]
 FREQUENCY = 5.6
-length_mm = [10,14,16] #set up for testing
+length_mm = [10,30] #set up for testing
 # BODY_RE = 56
 # BODY_IM = 15
 
 
 #PROJECT_PATH = r"C:\Users\NCAS\Documents\Tommy\Sketchfab_hoverfly\exports\Syrphus_ribesii_body_only0400"
-PROJECT_PATH = r"G:\Shared drives\Biodar_Comp_Files\Biodar_PC_migration\C\Users\NCAS\Documents\Tommy\Sketchfab_hoverfly\exports\Syrphus_ribesii_body_only0400"
+PROJECT_PATH = r"G:\My Drive\WIPL\WIPL models\no_baggage_spheroid\no_baggage_spheroid_test"
 SYMB_PATH = PROJECT_PATH + '.SMB'
 
 SymbolsList = wiplpy.WSymbols.GetSymbols(SYMB_PATH)
@@ -60,7 +60,7 @@ for size in length_mm:
         print(f"Running {pol} run")
         SymbolsList.PrintSymbols()
 
-        BASE_FILE_NAME = f"hoverfly_0400_p0_s0_{pol}_L{size}"
+        BASE_FILE_NAME = f"testing_spheroid_{pol}_L{size}"
         SAVE_PATH = r"C:\\Users\\Tommy\Desktop\\" #WRONG FOR NEW LAPTOP TESTING
 
 
