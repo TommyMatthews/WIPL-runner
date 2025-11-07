@@ -7,7 +7,7 @@ param(
     [string]$ArgsFile
 )
 
-#Add standard prefix to args file path
+# Add standard prefix to args file path
 $ArgsFile = ".\multi_file_run_lists\" + $ArgsFile
 
 # Check args file exists
@@ -16,10 +16,12 @@ if (-not (Test-Path $ArgsFile)) {
     exit 1
 }
 
-# Read args file, pipe into filter for empty lines)
+# Read args file, pipe into filter for empty lines
 $argLines = Get-Content $ArgsFile | Where-Object {$_.Trim() -ne""} 
 
 Write-Host "Running master_wipl_runner.py for $($argLines.Count) files"
+Write-Host "`n"
+Write-Host "`n"
 
 #For run metadata
 $startTime = Get-Date
@@ -27,7 +29,9 @@ $counter = 1
 
 foreach ($line in $argLines) {
     Write-Host "-------------------------------NEW WIPL FILE-------------------------------"
+    Write-Host "`n"
     Write-Host "-> Running $line"
+    Write-Host "`n"
     $values = $line -split '\s+'
     $argArray = @(
         "--mm", $values[0],
@@ -44,5 +48,9 @@ foreach ($line in $argLines) {
     $elapsedSeconds = [math]::Round($elapsedTime.TotalSeconds,1)
 
     Write-Host "----------- WIPL FILE $counter COMPLETE, TIME ELAPSED $elapsedSeconds s --------------"
+    Write-Host "`n"
+    Write-Host "`n"
+
+    $counter = $counter + 1
 }
 

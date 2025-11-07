@@ -136,7 +136,7 @@ if __name__ == "__main__":
 
                     print(kwargs)
 
-                    SymbolsList.PrintSymbols()
+                    #SymbolsList.PrintSymbols()
 
                     pro.Run(PROJECT_PATH)
 

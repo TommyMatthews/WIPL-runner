@@ -20,5 +20,12 @@ PARAMS_DICTS = {
             "lengths" : [12,14,16],
             "slants" : [0],
             "pitches" : [0]
+        },
+    "decimation_testing" : 
+        {
+            "frequency" : 5.6,
+            "lengths" : [5,12,20],
+            "slants" : [0],
+            "pitches" : [0]
         }
 }
