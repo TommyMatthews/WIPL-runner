@@ -31,6 +31,16 @@ pol_run_dict = {
     "V" : [0,1]
 }
 
+# Global log file handle
+log_file = None
+
+def print_and_log(message):
+    """Print to console and write to log file"""
+    print(message)
+    if log_file:
+        log_file.write(str(message) + '\n')
+        log_file.flush()  # Ensure it's written immediately
+
 def get_arguments():
     """
     Retrieve four arguments from user input:
@@ -70,23 +80,12 @@ def get_arguments():
     
     return args.model_main, args.model_suffix, args.params_dict, args.run_id
 
-def save_file(ds, model_main, model_suffix, run_id):
+def save_file(ds, save_dir, run_id):
     
-    MODEL_MAIN_DIR = os.path.join(RESULTS_BASE_PATH, f'{model_main}')
-    MODEL_SPECIFIC_DIR = os.path.join(MODEL_MAIN_DIR, f'{model_suffix}') 
-    RESULTS_SAVE_PATH = os.path.join(MODEL_SPECIFIC_DIR, f'{run_id}.nc') #CHANGE BACK TO .NC!!!!
-
-    if not os.path.isdir(MODEL_MAIN_DIR):
-        os.mkdir(MODEL_MAIN_DIR)
-
-    if not os.path.isdir(MODEL_SPECIFIC_DIR):
-        os.mkdir(MODEL_SPECIFIC_DIR)
+    RESULTS_SAVE_PATH = os.path.join(save_dir, f'{run_id}.nc') #CHANGE BACK TO .NC!!!!
 
     ds.to_netcdf(RESULTS_SAVE_PATH)
 
-
-def print_live_time(start):
-    pass
 
 if __name__ == "__main__":
 
@@ -100,6 +99,16 @@ if __name__ == "__main__":
 
     if not os.path.isfile(SYMB_PATH):
         print('Specified file does not exist, check input args.')
+
+    # Open log file
+    SAVE_DIR = os.path.join(RESULTS_BASE_PATH, f'{mm}', f'{ms}')
+    LOG_DIR = os.path.join(SAVE_DIR, 'log_files')
+    if not os.path.isdir(SAVE_DIR):
+        os.makedirs(SAVE_DIR, exist_ok=True)
+    if not os.path.isdir(LOG_DIR):
+        os.makedirs(LOG_DIR, exist_ok=True)
+    LOG_PATH = os.path.join(LOG_DIR, f'{ri}_log.txt')
+    log_file = open(LOG_PATH, 'w')
 
     SymbolsList = wiplpy.WSymbols.GetSymbols(SYMB_PATH)
     
@@ -138,9 +147,7 @@ if __name__ == "__main__":
                             'slant': slant,     
                         }
 
-                        print(kwargs)
-
-                        SymbolsList.PrintSymbols()
+                        print_and_log(kwargs)
 
                         #SymbolsList.PrintSymbols()
 
@@ -150,7 +157,7 @@ if __name__ == "__main__":
 
                         if far_field: 
 
-                            print('RESULTS PRESENT')
+                            print_and_log('RESULTS PRESENT')
                         
                             theta = far_field.GetThetaPoints()[0]
                             frequency = far_field.GetFrequencies()[0]
@@ -167,15 +174,15 @@ if __name__ == "__main__":
 
                         else: 
 
-                            print('NO RESULTS')                    
+                            print_and_log('NO RESULTS')                    
 
                         end = time.time()
-                        print(f'Combination {counter} done, {end-start:.4f} s total elapsed')
+                        print_and_log(f'Combination {counter} done, {end-start:.4f} s total elapsed')
                         counter +=1
 
     if ds:
         ds = add_metadata(ds)
-        save_file(ds, mm, ms, ri) #CHANGE BACK TO DS
+        save_file(ds, SAVE_DIR, ri) #CHANGE BACK TO DS
 
     else:
         print('NO RESULTS GENERATED: nothing saved... :/')

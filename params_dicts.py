@@ -50,13 +50,13 @@ PARAMS_DICTS = {
             "slants" : [0],
             "pitches" : [0]
         },
-    "new_bug_standard" : 
+    "new_hoverfly_full" : 
         {
             "type" : "bug",
-            "frequencies" : [5.6,9.4],
-            "lengths" : [5,12,20],
-            "slants" : [0],
-            "pitches" : [0]
+            "frequencies" : [3.0,5.6,9.4],
+            "lengths" : [5,8,12,16,20,30],
+            "slants" : [0.5,1,2],
+            "pitches" : [-25,-20,-15,-10,-5,0,5,10,15,20,25]
         }
 
 }
