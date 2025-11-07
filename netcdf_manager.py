@@ -1,19 +1,20 @@
 import xarray as xr
 import numpy as np
 
-def create_placeholder_dataset(initial_results, lengths, slants, pitches):
+def create_placeholder_dataset(initial_results, frequencies, lengths, slants, pitches):
 
     phi = initial_results['phi']
     # Define scattering patterns
     scattering_patterns = ['H_H_r', 'H_H_i', 'H_V_r', 'H_V_i', 'V_H_r', 'V_H_i', 'V_V_r', 'V_V_i', 'Zdr', 'PhiDP', 'RCS_H_total', 'RCS_V_total', 'RCS_HH', 'RCS_VV', 'RCS_HV', 'RCS_VH']
     # Create the dataset with NaNs as placeholders
     data_vars = {
-        pattern: (['length', 'pitch','slant', 'phi'],
-                np.full((len(lengths), len(pitches), len(slants), len(phi)), np.nan))
+        pattern: (['frequency','length', 'pitch','slant', 'phi'],
+                np.full((len(frequencies),len(lengths), len(pitches), len(slants), len(phi)), np.nan))
         for pattern in scattering_patterns
     }
     # Create coordinates
     coords = {
+        'frequency' : frequencies,
         'length': lengths,
         'pitch': pitches,
         'slant': slants,
@@ -22,7 +23,6 @@ def create_placeholder_dataset(initial_results, lengths, slants, pitches):
     # Create the xarray Dataset
     ds = xr.Dataset(data_vars=data_vars, coords=coords) 
 
-    ds.attrs['frequency'] = initial_results['frequency']
     ds.attrs['phi_counts'] = len(phi)
 
     return ds

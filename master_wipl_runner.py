@@ -13,7 +13,7 @@ import argparse
 
 import pickle
 
-from params_dicts import PARAMS_DICTS
+from params_dicts import PARAMS_DICTS, PERMITTIVITY_DICT
 from netcdf_manager import create_placeholder_dataset, input_single_sim_results, add_metadata
 
 WIPLDInstallDirectory = r"C:\WIPL-D Pro CAD 2024"
@@ -107,65 +107,71 @@ if __name__ == "__main__":
 
     params = PARAMS_DICTS[p]
 
-    frequency = params['frequency'] #GHz
+    frequencies = params['frequencies'] #GHz
     lengths = params['lengths'] #mm
     slants = params['slants']
     pitches = params['pitches']
 
-    SymbolsList.SetSymbolByName("f", frequency)
     
     counter = 1
     ds = None
 
-    for length in lengths:
-        for slant in slants:
-            for pitch in pitches:
-                for pol in pol_run_dict:
-                    
-                    SymbolsList.SetSymbolByName("pitch", pitch)
-                    SymbolsList.SetSymbolByName("slant", slant)
-                    SymbolsList.SetSymbolByName("Ephi", pol_run_dict[pol][0])
-                    SymbolsList.SetSymbolByName("Etheta", pol_run_dict[pol][1])
-                    SymbolsList.SetSymbolByName("length_mm", length)
+    for frequency in frequencies:
+        for length in lengths:
+            for slant in slants:
+                for pitch in pitches:
+                    for pol in pol_run_dict:
+                        
+                        SymbolsList.SetSymbolByName("f", frequency)
+                        SymbolsList.SetSymbolByName("Re_body", PERMITTIVITY_DICT["bug"][frequency]["Re_body"])
+                        SymbolsList.SetSymbolByName("Im_body", PERMITTIVITY_DICT["bug"][frequency]["Im_body"])
+                        SymbolsList.SetSymbolByName("pitch", pitch)
+                        SymbolsList.SetSymbolByName("slant", slant)
+                        SymbolsList.SetSymbolByName("Ephi", pol_run_dict[pol][0])
+                        SymbolsList.SetSymbolByName("Etheta", pol_run_dict[pol][1])
+                        SymbolsList.SetSymbolByName("length_mm", length)
 
-                    kwargs = {
-                        'length': length,
-                        'pitch': pitch,
-                        'slant': slant,     
-                    }
+                        kwargs = {
+                            'frequency' : frequency,
+                            'length': length,
+                            'pitch': pitch,
+                            'slant': slant,     
+                        }
 
-                    print(kwargs)
+                        print(kwargs)
 
-                    #SymbolsList.PrintSymbols()
+                        SymbolsList.PrintSymbols()
 
-                    pro.Run(PROJECT_PATH)
+                        #SymbolsList.PrintSymbols()
 
-                    far_field = wiplpy.WResults.InitializeFFResults(PROJECT_PATH)
+                        pro.Run(PROJECT_PATH)
 
-                    if far_field: 
+                        far_field = wiplpy.WResults.InitializeFFResults(PROJECT_PATH)
 
-                        print('RESULTS PRESENT')
-                    
-                        theta = far_field.GetThetaPoints()[0]
-                        frequency = far_field.GetFrequencies()[0]
+                        if far_field: 
 
-                        results_extractor = FFObjToDictConverter(far_field, theta, frequency)
+                            print('RESULTS PRESENT')
+                        
+                            theta = far_field.GetThetaPoints()[0]
+                            frequency = far_field.GetFrequencies()[0]
 
-                        results_dict = results_extractor.get_output_dict()
+                            results_extractor = FFObjToDictConverter(far_field, theta, frequency)
 
-                        if not DATASET_GENERATED:
-                            ds = create_placeholder_dataset(results_dict, lengths, slants, pitches)
-                            DATASET_GENERATED = True
+                            results_dict = results_extractor.get_output_dict()
 
-                        ds = input_single_sim_results(ds, pol, results_dict, kwargs)
+                            if not DATASET_GENERATED:
+                                ds = create_placeholder_dataset(results_dict, frequencies, lengths, slants, pitches)
+                                DATASET_GENERATED = True
 
-                    else: 
+                            ds = input_single_sim_results(ds, pol, results_dict, kwargs)
 
-                        print('NO RESULTS')                    
+                        else: 
 
-                    end = time.time()
-                    print(f'Combination {counter} done, {end-start:.4f} s total elapsed')
-                    counter +=1
+                            print('NO RESULTS')                    
+
+                        end = time.time()
+                        print(f'Combination {counter} done, {end-start:.4f} s total elapsed')
+                        counter +=1
 
     if ds:
         ds = add_metadata(ds)
@@ -175,5 +181,7 @@ if __name__ == "__main__":
         print('NO RESULTS GENERATED: nothing saved... :/')
 
     end = time.time()
+    print(f'Saved {ri}')
     print(f'Time taken: {end-start:.4f} s')
+
                     
