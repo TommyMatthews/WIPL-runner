@@ -15,6 +15,7 @@ import pickle
 
 from params_dicts import PARAMS_DICTS, PERMITTIVITY_DICT
 from netcdf_manager import create_placeholder_dataset, input_single_sim_results, add_metadata
+from wipl_logging import print_and_log, update_logging_sheet 
 
 WIPLDInstallDirectory = r"C:\WIPL-D Pro CAD 2024"
 
@@ -33,13 +34,6 @@ pol_run_dict = {
 
 # Global log file handle
 log_file = None
-
-def print_and_log(message):
-    """Print to console and write to log file"""
-    print(message)
-    if log_file:
-        log_file.write(str(message) + '\n')
-        log_file.flush()  # Ensure it's written immediately
 
 def get_arguments():
     """
@@ -180,15 +174,22 @@ if __name__ == "__main__":
                         print_and_log(f'Combination {counter} done, {end-start:.4f} s total elapsed')
                         counter +=1
 
+    end = time.time()
+
+    time_taken = end-start  
+
+    
     if ds:
         ds = add_metadata(ds)
         save_file(ds, SAVE_DIR, ri) #CHANGE BACK TO DS
+        print(f'Saved {ri}')
+
+        update_logging_sheet(mm, ms, p, ri, time_taken, SAVE_DIR)
 
     else:
         print('NO RESULTS GENERATED: nothing saved... :/')
-
-    end = time.time()
-    print(f'Saved {ri}')
-    print(f'Time taken: {end-start:.4f} s')
+    
+    
+    print(f'Time taken: {time_taken:.4f} s')
 
                     

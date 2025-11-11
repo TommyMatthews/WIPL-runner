@@ -57,6 +57,14 @@ PARAMS_DICTS = {
             "lengths" : [5,8,12,16,20,30],
             "slants" : [0.5,1,2],
             "pitches" : [-25,-20,-15,-10,-5,0,5,10,15,20,25]
-        }
+        },
+    "northern_damselfly_initial" : 
+        {
+            "type" : "bug",
+            "frequencies" : [3.0,5.6,9.4],
+            "lengths" : [25,30,35],
+            "slants" : [0.5,1,2],
+            "pitches" : [-10,-5,0,5,10,15,20,25]
+        },
 
 }
