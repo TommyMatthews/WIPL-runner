@@ -92,6 +92,7 @@ if __name__ == "__main__":
     SYMB_PATH = PROJECT_PATH + '.SMB'
 
     if not os.path.isfile(SYMB_PATH):
+        print(SYMB_PATH)
         print('Specified file does not exist, check input args.')
 
     # Open log file
@@ -114,7 +115,7 @@ if __name__ == "__main__":
     lengths = params['lengths'] #mm
     slants = params['slants']
     pitches = params['pitches']
-
+    model_type = params['type']
     
     counter = 1
     ds = None
@@ -126,8 +127,13 @@ if __name__ == "__main__":
                     for pol in pol_run_dict:
                         
                         SymbolsList.SetSymbolByName("f", frequency)
-                        SymbolsList.SetSymbolByName("Re_body", PERMITTIVITY_DICT["bug"][frequency]["Re_body"])
-                        SymbolsList.SetSymbolByName("Im_body", PERMITTIVITY_DICT["bug"][frequency]["Im_body"])
+                        SymbolsList.SetSymbolByName("Re_body", PERMITTIVITY_DICT[model_type][frequency]["Re_body"])
+                        SymbolsList.SetSymbolByName("Im_body", PERMITTIVITY_DICT[model_type][frequency]["Im_body"])
+
+                        if Re_appendage := PERMITTIVITY_DICT[model_type][frequency].get("Re_appendage"):
+                            SymbolsList.SetSymbolByName("Re_appendage", Re_appendage)
+                        if Im_appendage := PERMITTIVITY_DICT[model_type][frequency].get("Im_appendage"):
+                            SymbolsList.SetSymbolByName("Im_appendage", Im_appendage)
                         SymbolsList.SetSymbolByName("pitch", pitch)
                         SymbolsList.SetSymbolByName("slant", slant)
                         SymbolsList.SetSymbolByName("Ephi", pol_run_dict[pol][0])
