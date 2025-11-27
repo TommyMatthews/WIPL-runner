@@ -4,14 +4,6 @@ import numpy as np
 import os
 from params_dicts import PARAMS_DICTS
 
-log_file = None #placeholder logfile handle so global log file handle is defined
-
-def print_and_log(message):
-    """Print to console and write to log file"""
-    print(message)
-    if log_file:
-        log_file.write(str(message) + '\n')
-        log_file.flush()  # Ensure it's written immediately
 
 def update_logging_sheet(mm, ms, p, ri, time_taken, SAVE_DIR):
 

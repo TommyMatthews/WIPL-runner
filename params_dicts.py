@@ -80,6 +80,7 @@ PERMITTIVITY_DICT ={
 PARAMS_DICTS = {
     "hoverfly_test" : 
         {
+            "type" : "bug", 
             "frequencies" : [5.6],
             "lengths" : [12],
             "slants" : [0],
@@ -127,7 +128,7 @@ PARAMS_DICTS = {
         {
             "type" : "bug",
             "frequencies" : [3.0,5.6,9.4],
-            "lengths" : [5,10,20,25,30],
+            "lengths" : [5,10,20,30],
             "slants" : [0.5,1,2],
             "pitches" : [0,5,10,15,20]
         },
@@ -135,9 +136,9 @@ PARAMS_DICTS = {
         {
             "type" : "bird",
             "frequencies" : [3.0,5.6,9.4],
-            "lengths" : [75,100,125,150],
+            "lengths" : [100,125,150],
             "slants" : [0.5,1,2],
-            "pitches" : [0,5,10,15,20]
+            "pitches" : [0,10,20]
         },
     "northern_damselfly_high_f_test" : 
         {
@@ -155,4 +156,53 @@ PARAMS_DICTS = {
             "slants" : [0.5],
             "pitches" : [10]
         },
+    "beetle_elytra_comparison" : 
+        {
+            "type" : "bug",
+            "frequencies" : [3.0,5.6,9.4],
+            "lengths" : [10,20,30],
+            "slants" : [1],
+            "pitches" : [0,10]
+        },
+    "house_martin_wing_comparison" : 
+        {
+            "type" : "bird",
+            "frequencies" : [3.0,5.6,9.4],
+            "lengths" : [125],
+            "slants" : [1],
+            "pitches" : [0,10,20]
+        },
+    "damselfly_elevation_probing" : 
+        {
+            "type" : "bug",
+            "frequencies" : [3.0,5.6,9.4],
+            "lengths" : [30],
+            "slants" : [0.95, 0.98, 0.99,  1, 1.01, 1.02, 1.05],
+            "pitches" : [0,10,20]
+        },
+    "cicada_initial" : 
+        {
+            "type" : "bug",
+            "frequencies" : [3.0,5.6,9.4],
+            "lengths" : [50],
+            "slants" : [0.5,1,2],
+            "pitches" : [0,5,10,15,20]
+        },
+    "hawkmoth_initial" : 
+        {
+            "type" : "bug",
+            "frequencies" : [3.0,5.6,9.4],
+            "lengths" : [50],
+            "slants" : [0.5,1,2],
+            "pitches" : [0,5,10,15,20]
+        },
+    "peregrine_initial" : 
+        {
+            "type" : "bird",
+            "frequencies" : [3.0,5.6,9.4],
+            "lengths" : [400, 500],
+            "slants" : [0.5,1,2],
+            "pitches" : [0,10,20]
+        },
+
 }
