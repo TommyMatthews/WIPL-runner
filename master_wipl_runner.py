@@ -186,9 +186,10 @@ if __name__ == "__main__":
                         end = time.time()
                         print_and_log(f'Combination {counter} done, {end-start:.4f} s total elapsed')
                         counter +=1
-        if ds:
-            save_file(ds, SAVE_DIR, ri) #CHANGE BACK TO DS
-            print(f'Temp save {ri} for {frequency} GHz')
+
+                    if ds:
+                        save_file(ds, SAVE_DIR, ri) #CHANGE BACK TO DS
+                        print(f'Temp save {ri} for {frequency} GHz {length} mm {slant} deg {pitch} deg')
 
 
     end = time.time()

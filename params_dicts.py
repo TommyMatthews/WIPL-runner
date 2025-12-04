@@ -86,12 +86,13 @@ PARAMS_DICTS = {
             "slants" : [0],
             "pitches" : [0]
         },
-    "12mm_hoverfly_full" : 
+    "15mm_hoverfly_full" : 
         {
-            "frequencies" : [5.6],
-            "lengths" : [2,8,10,12,14,16,30],
-            "slants" : [0],
-            "pitches" : [0]
+            "type" : "bug", 
+            "frequencies" : [3.0,5.6,9.4],
+            "lengths" : [5,10,15,20,30,50,75,125],
+            "slants" : [1],
+            "pitches" : [0,10]
         },
 
     "12mm_hoverfly_12_14_16" : 
@@ -107,6 +108,14 @@ PARAMS_DICTS = {
             "lengths" : [5,12,20],
             "slants" : [0],
             "pitches" : [0]
+        },
+    "decimation_testing_2" : 
+        {
+            "type" : "bug",
+            "frequencies" : [9.4],
+            "lengths" : [15,20,30],
+            "slants" : [1],
+            "pitches" : [10]
         },
     "new_hoverfly_full" : 
         {
@@ -204,5 +213,78 @@ PARAMS_DICTS = {
             "slants" : [0.5,1,2],
             "pitches" : [0,10,20]
         },
-
+    "peregrine_reduced" : 
+        {
+            "type" : "bird",
+            "frequencies" : [3.0,5.6,9.4],
+            "lengths" : [500],
+            "slants" : [1],
+            "pitches" : [0,10]
+        },
+    "peregrine_xband_tidy" : 
+        {
+            "type" : "bird",
+            "frequencies" : [9.4],
+            "lengths" : [400, 500],
+            "slants" : [1],
+            "pitches" : [0,10]
+        },
+    "large_red_belted_clearwing_inital" : 
+        {
+            "type" : "bug",
+            "frequencies" : [3.0,5.6,9.4],
+            "lengths" : [14],
+            "slants" : [1],
+            "pitches" : [0,5,10,15,20]
+        },
+    "darter_initial" : 
+        {
+            "type" : "bug",
+            "frequencies" : [3.0,5.6,9.4],
+            "lengths" : [25],
+            "slants" : [1],
+            "pitches" : [0,5,10,15,20]
+        },
+    "15mm_hoverfly_initial" : 
+        {
+            "type" : "bug",
+            "frequencies" : [3.0,5.6,9.4],
+            "lengths" : [15],
+            "slants" : [1],
+            "pitches" : [0,5,10,15,20]
+        },
+    "15mm_hoverfly_initial" : 
+        {
+            "type" : "bug",
+            "frequencies" : [3.0,5.6,9.4],
+            "lengths" : [15],
+            "slants" : [1],
+            "pitches" : [0,5,10,15,20]
+        },
+    "12mm_hoverfly_initial" : 
+        {
+            "type" : "bug",
+            "frequencies" : [3.0,5.6,9.4],
+            "lengths" : [15],
+            "slants" : [1],
+            "pitches" : [0,5,10,15,20]
+        },
+    "spider_testing" : 
+        {
+            "type" : "bug",
+            "frequencies" : [3.0,5.6,9.4],
+            "lengths" : [5],
+            "slants" : [1],
+            "pitches" : [-90,0,90]
+        },
+    "valery_bird_initial" : 
+        {
+            "type" : "bird",
+            "frequencies" : [3.0,5.6,9.4],
+            "lengths" : [125,500],
+            "slants" : [1],
+            "pitches" : [0,10,20]
+        },
+    ""
+    
 }
