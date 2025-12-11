@@ -72,7 +72,7 @@ foreach ($line in $argLines) {
         "--p", $values[2],
         "--ri", $values[3]
     )
-    python master_wipl_runner.py $argArray
+    python log.py $argArray
     if ($LASTEXITCODE -ne 0) {
         write-Warning "Run failed for args: $line"
     }

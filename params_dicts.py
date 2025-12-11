@@ -58,23 +58,22 @@ PERMITTIVITY_DICT ={
             'Re_appendage' : 52,
             'Im_appendage' : 13, 
         },
-        # 35 :
-        # {
-        #     'Re_body':52, 
-        #     'Im_body':13,
-        #     'Re_appendage' : 52,
-        #     'Im_appendage' : 13, 
-        # },
-        # 35 :
-        # {
-        #     'Re_body':52,
-        #     'Im_body':13,
-        #     'Re_appendage' : 52,
-        #     'Im_appendage' : 13, 
-        # },
+        35 :
+        {
+            'Re_body':20, 
+            'Im_body':20,
+        },
+        94 :
+        {
+            'Re_body':9,
+            'Im_body':11.7,
+        },
     },
 }
 
+full_insect_pitches = [-90,-70,-50,-30,-10,0,5,10,15,20,25,30,50,70,90]
+
+full_size_sweep = [5,10,15,20,30,50,75,125,200]
 
 # Add optional Chitin parts
 PARAMS_DICTS = {
@@ -285,6 +284,148 @@ PARAMS_DICTS = {
             "slants" : [1],
             "pitches" : [0,10,20]
         },
-    ""
-    
+    "small_insect_full_param" :
+        {
+            "type" : "bug",
+            "frequencies" : [3.0,5.6,9.4],
+            "lengths" : [5],
+            "slants" : [1],
+            "pitches" : full_insect_pitches,
+        },
+    "medium_insect_full_param" :
+        {
+            "type" : "bug",
+            "frequencies" : [3.0,5.6,9.4],
+            "lengths" : [15],
+            "slants" : [1],
+            "pitches" : full_insect_pitches,
+        },
+    "large_insect_full_param" :
+        {
+            "type" : "bug",
+            "frequencies" : [3.0,5.6,9.4],
+            "lengths" : [35,50],
+            "slants" : [1],
+            "pitches" : full_insect_pitches,
+        },
+    "house_martin_full_param" :
+        {
+            "type" : "bird",
+            "frequencies" : [3.0,5.6,9.4],
+            "lengths" : [125],
+            "slants" : [1],
+            "pitches" : [0,5,10,15,25,30]
+        },
+    "falcon_full_param" :
+        {
+            "type" : "bird",
+            "frequencies" : [3.0,5.6,9.4],
+            "lengths" : [500],
+            "slants" : [1],
+            "pitches" : [0,5,10,15,25,30]
+        },
+    "insect_full_size_sweep" :
+        {
+            "type" : "bug",
+            "frequencies" : [3.0,5.6,9.4],
+            "lengths" : full_size_sweep,
+            "slants" : [1],
+            "pitches" : [0,10],
+        },
+    "bird_full_size_sweep" :
+        {
+            "type" : "bird",
+            "frequencies" : [3.0,5.6,9.4],
+            "lengths" : full_size_sweep,
+            "slants" : [1],
+            "pitches" : [0,10],
+        },
+    "EarthCare_small_insect" :
+        {
+            "type" : "bug",
+            "frequencies" : [94],
+            "lengths" : [5],
+            "slants" : [-90],
+            "pitches" : [0,10],
+        },
+    "EarthCare_medium_insect" :
+        {
+            "type" : "bug",
+            "frequencies" : [94],
+            "lengths" : [15],
+            "slants" : [-90],
+            "pitches" : [0,10],
+        },
+    "EarthCare_large_insect" :
+        {
+            "type" : "bug",
+            "frequencies" : [94],
+            "lengths" : [35,50],
+            "slants" : [-90],
+            "pitches" : [0,10],
+        },
+    "EarthCare_small_insect_35" :
+        {
+            "type" : "bug",
+            "frequencies" : [35],
+            "lengths" : [5],
+            "slants" : [-90],
+            "pitches" : [0],
+        },
+    "EarthCare_medium_insect_35" :
+        {
+            "type" : "bug",
+            "frequencies" : [35],
+            "lengths" : [15],
+            "slants" : [-90],
+            "pitches" : [0],
+        },
+    "EarthCare_large_insect_35" :
+        {
+            "type" : "bug",
+            "frequencies" : [35],
+            "lengths" : [35,50],
+            "slants" : [-90],
+            "pitches" : [0],
+        },
+    "EarthCare_martin_35" :
+        {
+            "type" : "bird",
+            "frequencies" : [35],
+            "lengths" : [125],
+            "slants" : [-90],
+            "pitches" : [0],
+        },
+    "EarthCare_falcon_35" :
+        {
+            "type" : "bird",
+            "frequencies" : [35],
+            "lengths" : [500],
+            "slants" : [-90],
+            "pitches" : [0],
+        },
+    "EarthCare_martin_94" :
+        {
+            "type" : "bird",
+            "frequencies" : [94],
+            "lengths" : [125],
+            "slants" : [-90],
+            "pitches" : [0],
+        },
+    "EarthCare_falcon_94" :
+        {
+            "type" : "bird",
+            "frequencies" : [94],
+            "lengths" : [500],
+            "slants" : [-90],
+            "pitches" : [0],
+        },
+    "Earthcare_spheroid" :
+        {
+            "type" : "bird",
+            "frequencies" : [35,94],
+            "lengths" : [100,200],
+            "slants" : [-90],
+            "pitches" : [0],
+        },
 }
