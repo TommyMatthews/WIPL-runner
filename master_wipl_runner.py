@@ -167,9 +167,9 @@ if __name__ == "__main__":
                             print_and_log('RESULTS PRESENT')
                         
                             theta = far_field.GetThetaPoints()[0]
-                            frequency = far_field.GetFrequencies()[0]
+                            result_frequency = far_field.GetFrequencies()[0]
 
-                            results_extractor = FFObjToDictConverter(far_field, theta, frequency)
+                            results_extractor = FFObjToDictConverter(far_field, theta, result_frequency)
 
                             results_dict = results_extractor.get_output_dict()
 

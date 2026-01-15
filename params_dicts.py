@@ -74,6 +74,8 @@ PERMITTIVITY_DICT ={
 full_insect_pitches = [-90,-70,-50,-30,-10,0,5,10,15,20,25,30,50,70,90]
 
 full_size_sweep = [5,10,15,20,30,50,75,125,200]
+finer_size_sweep = [2,4,6,8,10,12,14,16,18,20,25,35,45,50,75,125,200]
+
 
 # Add optional Chitin parts
 PARAMS_DICTS = {
@@ -332,10 +334,26 @@ PARAMS_DICTS = {
             "slants" : [1],
             "pitches" : [0,10],
         },
+    "insect_xband_size_sweep" :
+    {
+        "type" : "bug",
+        "frequencies" : [9.4],
+        "lengths" : full_size_sweep,
+        "slants" : [1],
+        "pitches" : [0,10],
+    },
     "bird_full_size_sweep" :
         {
             "type" : "bird",
             "frequencies" : [3.0,5.6,9.4],
+            "lengths" : full_size_sweep,
+            "slants" : [1],
+            "pitches" : [0,10],
+        },
+    "bird_xband_size_sweep" :
+        {
+            "type" : "bird",
+            "frequencies" : [9.4],
             "lengths" : full_size_sweep,
             "slants" : [1],
             "pitches" : [0,10],
@@ -426,6 +444,22 @@ PARAMS_DICTS = {
             "frequencies" : [35,94],
             "lengths" : [100,200],
             "slants" : [-90],
+            "pitches" : [0],
+        },
+    "insect_finer_size_sweep" :
+    {
+        "type" : "bug",
+        "frequencies" : [9.4,5.6,3.0],
+        "lengths" : finer_size_sweep,
+        "slants" : [1],
+        "pitches" : [0],
+    },
+    "bird_finer_size_sweep" :
+        {
+            "type" : "bird",
+            "frequencies" : [9.4,5.6,3.0],
+            "lengths" : finer_size_sweep,
+            "slants" : [1],
             "pitches" : [0],
         },
 }
